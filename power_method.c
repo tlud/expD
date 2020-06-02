@@ -80,6 +80,19 @@ int main(void){
   printf("eign vector: ");
   rep(j, N) printf("%3lf, ", eignvec[j]);
 
+  ///////// Au = (lambda)u の確認 ///////////////////
+
+  double Au[N];
+  rep(i, N) Au[i] = dot(A[i] , u);
+
+  printf("\n");
+  printf("\n");
+  printf("Au: ");
+  rep(j, N) printf("%3lf, ", Au[j]);
+  printf("\n");
+  printf("(lambda)u: ");
+  rep(j, N) printf("%3lf, ", eignvec[j] * eignvalue);
+
 
 
 
