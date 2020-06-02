@@ -23,19 +23,15 @@ int main(void){
   double u[N] = {0};
 
   double x_norm = 0;
-  double epsilon = 0.0001;
-  int max_itr = 100;
+  double epsilon = 0.000001;
+  int max_itr = 1000;
   double d = 0;
-  int k = 0;
 
   double eignvec[N] = {0};
   double eignvalue = 0;
 ////////////////////////////////////////////////////////////////
 
   init(x);
-  k = 0;
-
-
 
   rep(i, max_itr){
 
@@ -50,16 +46,22 @@ int main(void){
     // d = max{ abs(x(i) - x_new(i)) }
 
     double dif[N];
-    rep(j, N) dif[j] = abs(x[j] - x[j]);
-
+    rep(j, N) dif[j] = fabs(x[j] - x_new[j]);
     d = max(dif);
 
 ///////////////////////
 
     if(d < epsilon) break; //収束判定
-    else if(k == max_itr - 1){ //最大反復との比較
-      init(x); k = 0;
+
+    else if(i == max_itr - 1){ //最大反復との比較
+      init(x); i = 0;
+      printf("init\n");
     }
+
+
+    rep(j, N) x[j] = x_new[j];
+
+
   }
 
 ///////////////////////
@@ -86,7 +88,7 @@ int main(void){
 
 
 void init(double *vec){
-  rep(i, N) vec[i] = 1.0;
+  rep(i, N) vec[i] = (rand() % 11); // [0, 10]
 }
 
 double dot(double *vec1, double *vec2){
